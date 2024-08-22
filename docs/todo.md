@@ -1,0 +1,4 @@
+- Add Decrement and Increment functionality
+- Also +=, -=, *=, /=
+- Add support for comments
+- To abstract away the methods for two charcter tokens when I add them

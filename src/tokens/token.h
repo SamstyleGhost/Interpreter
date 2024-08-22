@@ -2,16 +2,29 @@
 #define _TOKEN_H_
 
 #include <iostream>
+#include <unordered_map>
 
 enum class Tokenlist {
 	ILLEGAL,
 	EOFC, // custom EOF
+	
 	IDENT, // Identifier
+	INT,
+
 	ASSIGN,
 	PLUS,
 	MINUS,
-	MULTIPLY,
-	DIVIDE,
+	ASTERISK,
+	SLASH,
+	BANG,
+
+	GT,
+	LT,
+	GTE,
+	LTE,
+	EQ,
+	NEQ,
+
 	COMMA,
 	SEMICOLON,
 	LPAREN,
@@ -20,8 +33,15 @@ enum class Tokenlist {
 	RBRACE,
 	LBRACK,
 	RBRACK,
+
 	FUNCTION,
-	LET 
+	LET,
+	RETURN,
+
+	TRUE,
+	FALSE,
+	IF,
+	ELSE,
 };
 
 struct Token {
@@ -30,5 +50,9 @@ struct Token {
 	
 	friend std::ostream& operator<<(std::ostream& os, const Token& tok);
 };
+
+bool isLetter(char ch);
+bool isDigit(char ch);
+Tokenlist lookupIdentifier(std::string literal);
 
 #endif
