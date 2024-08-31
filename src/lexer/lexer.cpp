@@ -121,6 +121,7 @@ void Lexer::readLetters(FILE* input, Token* tok) {
   tok->Literal = buffer;
   tok->Type = lookupIdentifier(buffer);
   buffer = "";
+  ungetc(ch, input); // Added because there was an error that did not process the next character after the digits and letter
 }
 
 void Lexer::readDigits(FILE* input, Token* tok) {
@@ -131,4 +132,5 @@ void Lexer::readDigits(FILE* input, Token* tok) {
   tok->Literal = buffer;
   tok->Type = Tokenlist::INT;
   buffer = "";
+  ungetc(ch, input); // Added because there was an error that did not process the next character after the digits and letters
 }

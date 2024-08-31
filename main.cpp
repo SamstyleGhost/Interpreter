@@ -2,7 +2,7 @@
 
 int main (int argc, char *argv[]) {
 	
-	FILE* inputFile = fopen("./tests/test2.txt", "r");
+	FILE* inputFile = fopen("/home/rohan/Work/Interpreter/tests/test2.txt", "r");
 
 	if(!inputFile) {
 		std::cout << "Cannot open file";
