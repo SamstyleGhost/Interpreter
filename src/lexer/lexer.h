@@ -15,20 +15,17 @@ class Lexer {
   int mls = 0; // Multi-line comment start
   std::string buffer = "";
   int lineNum = 1;
+  FILE* input;
 
-  char peekChar(FILE* input); // gives the next character in the input
-  Token newToken(Tokenlist type, char literal); // Will generate a Token object and return it
-  Token newToken(Tokenlist type, std::string literal); // Overloaded the function in case the literal value is directly a string
-  void skipWhitespace(FILE* input);
-  void readLetters(FILE* input, Token* tok);
-  void readDigits(FILE* input, Token* tok);
-
-  // ! Removed the function below. Instead overloaded the << operator to display the tok
-  // Function to display the token 
-  // void display(Token tok);
+  char peekChar(); // gives the next character in the input
+  Token* newToken(Tokenlist type, char literal); // Will generate a Token object and return it
+  Token* newToken(Tokenlist type, std::string literal); // Overloaded the function in case the literal value is directly a string
+  void skipWhitespace();
+  Token* readLetters();
+  Token* readDigits();
 
 public:
-  Lexer(FILE* input);
-
+  Lexer(FILE* inputFile);
+  Token* generateToken();
 };
 #endif

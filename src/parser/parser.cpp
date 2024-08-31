@@ -6,5 +6,24 @@
   ? 4. This will allow us to actually parse statements as soon as they are received
     * Wonder if the above thing, running the lexer through the parser and parsing a token at a time is valid for both interpreters and compilers or is it only for interpreters
     * Bcoz, just by straight feeling which could be wrong, it could be that compilers will first run the Lexical Analysis of the entire source code, store the tokens and then run the next phases.
-
 */
+
+#include "parser.h"
+
+Parser::Parser(Lexer *l) { 
+  lex = l; 
+  
+  currToken = nullptr;
+  peekToken = nullptr;
+  
+  // ! Havent done it here, but it is probably a good idea to check if the file is empty by checking if the initial tokens are CEOF.
+  // TODO: check if initial tokens are EOF
+
+  getNextToken();
+  getNextToken();
+}
+
+void Parser::getNextToken() {
+  currToken = peekToken;
+  peekToken = lex->generateToken();
+}

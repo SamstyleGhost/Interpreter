@@ -10,6 +10,14 @@
 
 class Parser {
   Lexer *lex;
+  Token *currToken;
+  Token *peekToken;
+  
+  void getNextToken();
+  
+public:
+  Parser(Lexer *l);
+
 };
 
 #endif
