@@ -1,5 +1,4 @@
-#ifndef PARSER_H
-#define PARSER_H
+#pragma once
 
 #include <iostream>
 
@@ -13,11 +12,8 @@ class Parser {
   Token *currToken;
   Token *peekToken;
   
-  void getNextToken();
-  
 public:
   Parser(Lexer *l);
 
+  void getNextToken();
 };
-
-#endif

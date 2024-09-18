@@ -21,6 +21,11 @@ Parser::Parser(Lexer *l) {
 
   getNextToken();
   getNextToken();
+  
+  if(peekToken->Type == Tokenlist::EOFC || currToken->Type == Tokenlist::EOFC) {
+    std::cerr << "Empty file" << std::endl;
+    exit(EXIT_FAILURE);
+  }
 }
 
 void Parser::getNextToken() {

@@ -13,5 +13,5 @@ int main (int argc, char *argv[]) {
 	Lexer newLexer = Lexer(inputFile);
 	Parser newParser = Parser(&newLexer);
 	
-	return 0;
+	return EXIT_SUCCESS;
 }

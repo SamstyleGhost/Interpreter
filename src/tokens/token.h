@@ -1,5 +1,4 @@
-#ifndef _TOKEN_H_
-#define _TOKEN_H_
+#pragma once
 
 #include <iostream>
 #include <unordered_map>
@@ -54,5 +53,3 @@ struct Token {
 bool isLetter(char ch);
 bool isDigit(char ch);
 Tokenlist lookupIdentifier(std::string literal);
-
-#endif

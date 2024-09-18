@@ -1,12 +1,16 @@
-#ifndef AST_H
-#define AST_H
+#pragma once
+
+/*
+  Every line would be considered as a node. But what kind of node?
+  Will it be a statement node or an expression node.
+  That is what I have to decide
+*/
 
 #include <iostream>
 #include <vector>
-#include <memory>
 
 #include "../tokens/token.h"
-
+/*
 class Node {
 public:
   virtual std::string tokenLiteral() const = 0;
@@ -29,7 +33,7 @@ public:
 };
 
 class Program : public Node {
-  std::vector<std::shared_ptr<Statement>> statements; // shared_ptr helps manage dynamic memory efficiently. Dont have to worry about deleting it when no longer in use
+  std::vector<std::unique_ptr<Statement>> statements; // shared_ptr helps manage dynamic memory efficiently. Dont have to worry about deleting it when no longer in use
   
   std::string tokenLiteral() const override;
 };
@@ -61,4 +65,31 @@ public:
   std::string tokenLiteral(); 
 };
 
-#endif
+*/
+
+class Expression {
+public:
+  Token token;
+};
+
+class Identifier {
+public:
+  Token token;
+};
+
+class Statement {
+public:
+  virtual void statementNode() const = 0;
+  virtual Tokenlist getTokenType() const = 0; // ! Will see if I need to change this from Tokenlist to Token
+
+  virtual ~Statement() = default;
+};
+
+class LetStatement : public Statement {
+  Token token; // LET token
+  Identifier identifier;
+  Expression expression;
+  
+  void statementNode() const override;
+  Tokenlist getTokenType(); // This is for the type of the variable that will be assigned
+};

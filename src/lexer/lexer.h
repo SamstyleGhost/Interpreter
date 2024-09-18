@@ -1,5 +1,4 @@
-#ifndef LEXER_H
-#define LEXER_H
+#pragma once
 
 #include <iostream>
 #include <stdio.h>
@@ -27,5 +26,5 @@ class Lexer {
 public:
   Lexer(FILE* inputFile);
   Token* generateToken();
+
 };
-#endif
