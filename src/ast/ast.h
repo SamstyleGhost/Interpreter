@@ -82,7 +82,7 @@ public:
   virtual void statementNode() const = 0;
   virtual Tokenlist getTokenType() const = 0; // ! Will see if I need to change this from Tokenlist to Token
 
-  virtual ~Statement() = default;
+  virtual ~Statement() = default; // I need this destructor here because if I dont have this, then if I delete a child object through Statement class will not call the derived class's destructor
 };
 
 class LetStatement : public Statement {
@@ -91,5 +91,5 @@ class LetStatement : public Statement {
   Expression expression;
   
   void statementNode() const override;
-  Tokenlist getTokenType(); // This is for the type of the variable that will be assigned
+  Tokenlist getTokenType() const override; // This is for the type of the variable that will be assigned
 };

@@ -1,5 +1,6 @@
-#include "./src/lexer/lexer.h"
-#include "./src/parser/parser.h"
+#include "src/lexer/lexer.h"
+#include "src/parser/parser.h"
+#include "src/program/program.h"
 
 int main (int argc, char *argv[]) {
 	
@@ -12,6 +13,7 @@ int main (int argc, char *argv[]) {
 
 	Lexer newLexer = Lexer(inputFile);
 	Parser newParser = Parser(&newLexer);
-	
+	Program newProgram = Program(&newParser);	
+		
 	return EXIT_SUCCESS;
 }

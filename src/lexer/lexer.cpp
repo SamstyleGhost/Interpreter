@@ -93,8 +93,8 @@ Token* Lexer::generateToken() {
   if (tok == nullptr) {
     std::cerr << "Error: Token was not created successfully!" << std::endl;
     // Handle error accordingly
-  } else {
-    std::cout << *tok;
+  // } else {
+  //   std::cout << *tok;
   }
   
   return tok;

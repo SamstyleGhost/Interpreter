@@ -28,7 +28,33 @@ Parser::Parser(Lexer *l) {
   }
 }
 
+Statement* Parser::parseStatement(Token *tok) {
+  switch (tok->Type) {
+    case Tokenlist::LET:
+      return parseLetStatement();
+    default:
+      std::cout << "Ehh..." << std::endl;
+  }
+
+  return nullptr;
+}
+
+LetStatement* Parser::parseLetStatement() {
+  std::cout << "Inside Let Statement parser\n";
+
+  LetStatement* ls = new LetStatement();
+  while(currToken->Type != Tokenlist::SEMICOLON) {
+    std::cout << *currToken;
+    getNextToken();
+  }
+
+  return ls;
+}
+
 void Parser::getNextToken() {
   currToken = peekToken;
   peekToken = lex->generateToken();
 }
+
+Token* Parser::getCurrToken() { return currToken; }
+Token* Parser::getPeekToken() { return peekToken; }

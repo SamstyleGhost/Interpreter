@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 #include "../ast/ast.h"
 #include "../lexer/lexer.h"
@@ -12,8 +13,14 @@ class Parser {
   Token *currToken;
   Token *peekToken;
   
+  LetStatement* parseLetStatement();
+  
 public:
   Parser(Lexer *l);
-
+  
+  Token *getCurrToken();
+  Token *getPeekToken();
   void getNextToken();
+  
+  Statement* parseStatement(Token *tok);
 };
