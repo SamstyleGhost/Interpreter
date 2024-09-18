@@ -28,8 +28,8 @@ Parser::Parser(Lexer *l) {
   }
 }
 
-Statement* Parser::parseStatement(Token *tok) {
-  switch (tok->Type) {
+Statement* Parser::parseStatement() {
+  switch (currToken->Type) {
     case Tokenlist::LET:
       return parseLetStatement();
     default:
@@ -43,10 +43,29 @@ LetStatement* Parser::parseLetStatement() {
   std::cout << "Inside Let Statement parser\n";
 
   LetStatement* ls = new LetStatement();
-  while(currToken->Type != Tokenlist::SEMICOLON) {
-    std::cout << *currToken;
-    getNextToken();
+
+  if(peekToken->Type != Tokenlist::IDENT) {
+    std::cerr << "Incorrect syntax. Did not find identifier near Let statement" << std::endl;
+    return nullptr;
   }
+
+  getNextToken();
+
+  ls->setIdentifier(currToken->Literal);
+
+  if(peekToken->Type != Tokenlist::ASSIGN) {
+    std::cerr << "Incorrect syntax. Did not find assignment near Let statement" << std::endl;
+    return nullptr;
+  }
+
+  getNextToken();
+
+  // TODO: Will have to add an error checking step here
+  getNextToken();
+
+  ls->setValue(currToken->Literal);
+
+  getNextToken();
 
   return ls;
 }

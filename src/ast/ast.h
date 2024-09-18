@@ -72,15 +72,17 @@ public:
   Token token;
 };
 
+// TODO: Will definitely have to convert the Identifier and Expression classes into an abstract one so that I can assign if the current variable is an INT, DOUBLE, etc.
 class Identifier {
 public:
-  Token token;
+  Tokenlist identifierType; // ! Currently, this is just the IDENT token
+  std::string variableName;
 };
 
 class Statement {
 public:
   virtual void statementNode() const = 0;
-  virtual Tokenlist getTokenType() const = 0; // ! Will see if I need to change this from Tokenlist to Token
+  virtual void printContents() const = 0;
 
   virtual ~Statement() = default; // I need this destructor here because if I dont have this, then if I delete a child object through Statement class will not call the derived class's destructor
 };
@@ -88,8 +90,13 @@ public:
 class LetStatement : public Statement {
   Token token; // LET token
   Identifier identifier;
-  Expression expression;
+  // Expression expression;
+  std::string value; // ! Currently for testing purposes
   
   void statementNode() const override;
-  Tokenlist getTokenType() const override; // This is for the type of the variable that will be assigned
+  void printContents() const override;
+
+public:
+  void setIdentifier(std::string name); // TODO: Am initializing the tokentype as IDENT rn, will change this later
+  void setValue(std::string val);
 };

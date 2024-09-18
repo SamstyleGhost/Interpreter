@@ -22,5 +22,5 @@ public:
   Token *getPeekToken();
   void getNextToken();
   
-  Statement* parseStatement(Token *tok);
+  Statement* parseStatement();
 };

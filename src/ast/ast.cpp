@@ -1,5 +1,16 @@
 #include "ast.h"
 
 void LetStatement::statementNode() const {};
-Tokenlist LetStatement::getTokenType() const { return token.Type; }
 
+void LetStatement::printContents() const {
+  std::cout << identifier.variableName << " " << value << "\n";
+}
+
+void LetStatement::setIdentifier(std::string name) {
+  identifier.identifierType = Tokenlist::IDENT;
+  identifier.variableName = name;
+}
+
+void LetStatement::setValue(std::string val) {
+  value = val;
+}
