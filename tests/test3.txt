@@ -1,2 +1,4 @@
 let five = 5;
-let ten = 10;
+let ten = true;
+
+return x + y;

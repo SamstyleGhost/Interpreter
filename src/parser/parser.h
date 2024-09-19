@@ -13,6 +13,7 @@ class Parser {
   Token *currToken;
   Token *peekToken;
   
+  bool expectPeek(Tokenlist ty);
   LetStatement* parseLetStatement();
   
 public:
