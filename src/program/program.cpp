@@ -8,7 +8,7 @@ Program::Program(Parser *p) {
 
     if(currStatement) statements.push_back(std::unique_ptr<Statement>(currStatement));
 
-    parser->getNextToken();
+    parser->consumeToken();
   }
 
   for(const auto& ptr : statements) {

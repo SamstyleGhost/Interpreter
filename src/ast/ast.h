@@ -7,13 +7,22 @@
 
 class Expression {
 public:
-  Token token;
+  virtual void expressionNode() const = 0;
+  virtual Tokenlist getReturnType() const = 0;
+  
+  virtual ~Expression() = default;
 };
 
-// TODO: Will definitely have to convert the Identifier and Expression classes into an abstract one so that I can assign if the current variable is an INT, DOUBLE, etc.
+class IntExpression : public Expression {
+  int literalValue = 0; // Initializing the INT token with 0
+  
+  void expressionNode() const override;
+  Tokenlist getReturnType() const override;
+};
+
 class Identifier {
 public:
-  Tokenlist identifierType; // ! Currently, this is just the IDENT token
+  Tokenlist identifierType; // This should be the Identifier token only since the expression is the one that has a type
   std::string variableName;
 };
 
@@ -26,15 +35,29 @@ public:
 };
 
 class LetStatement : public Statement {
-  Token token; // LET token
+  Tokenlist tokenType; // LET token
   Identifier identifier;
-  // Expression expression;
+  // Expression* expression;
   std::string value; // ! Currently for testing purposes
   
   void statementNode() const override;
   void printContents() const override;
 
 public:
+  LetStatement();
   void setIdentifier(std::string name); // TODO: Am initializing the tokentype as IDENT rn, will change this later
+  void setValue(std::string val);
+};
+
+class ReturnStatement : public Statement {
+  Tokenlist tokenType;
+  // Expression* expression;
+  std::string value; // !Testing
+  
+  void statementNode() const override;
+  void printContents() const override;
+
+public:
+  ReturnStatement();
   void setValue(std::string val);
 };

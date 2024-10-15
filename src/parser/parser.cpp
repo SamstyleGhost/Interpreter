@@ -6,8 +6,8 @@ Parser::Parser(Lexer *l) {
   currToken = nullptr;
   peekToken = nullptr;
 
-  getNextToken();
-  getNextToken();
+  consumeToken();
+  consumeToken();
   
   if(peekToken->Type == Tokenlist::EOFC || currToken->Type == Tokenlist::EOFC) {
     std::cerr << "Empty file" << std::endl;
@@ -19,6 +19,8 @@ Statement* Parser::parseStatement() {
   switch (currToken->Type) {
     case Tokenlist::LET:
       return parseLetStatement();
+    case Tokenlist::RETURN:
+      return parseReturnStatement();
     default:
       std::cout << "Ehh..." << std::endl;
   }
@@ -44,16 +46,28 @@ LetStatement* Parser::parseLetStatement() {
 
   // * I could check the peekToken type in a switch-case. And based on that type have the value and the type of identifier set.
   // TODO: Will have to add an error checking step here
-  getNextToken();
+  // TODO: And also at the end to check semicolon error
+  consumeToken();
 
   ls->setValue(currToken->Literal);
 
-  getNextToken();
+  consumeToken();
 
   return ls;
 }
 
-void Parser::getNextToken() {
+ReturnStatement* Parser::parseReturnStatement() {
+  ReturnStatement* rs = new ReturnStatement();
+
+  consumeToken();
+
+  rs->setValue(currToken->Literal);
+  consumeToken();
+
+  return rs;
+}
+
+void Parser::consumeToken() {
   currToken = peekToken;
   peekToken = lex->generateToken();
 }
@@ -63,7 +77,7 @@ Token* Parser::getPeekToken() { return peekToken; }
 
 bool Parser::expectPeek(Tokenlist ty) {
   if(peekToken->Type == ty) {
-    getNextToken();
+    consumeToken();
     return true;
   }
   return false;

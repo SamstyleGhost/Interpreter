@@ -15,13 +15,14 @@ class Parser {
   
   bool expectPeek(Tokenlist ty);
   LetStatement* parseLetStatement();
+  ReturnStatement* parseReturnStatement();
   
 public:
   Parser(Lexer *l);
   
   Token *getCurrToken();
   Token *getPeekToken();
-  void getNextToken();
+  void consumeToken();
   
   Statement* parseStatement();
 };
